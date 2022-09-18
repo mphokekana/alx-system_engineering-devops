@@ -1,2 +1,2 @@
 #!/bin/bash
-chown -h mpho:staff -hello
+chown -h mpho:staff _hello
