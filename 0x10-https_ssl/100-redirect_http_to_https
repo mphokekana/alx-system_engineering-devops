@@ -2,7 +2,7 @@ global
 	log /dev/log	local0
 	log /dev/log	local1 notice
 	chroot /var/lib/haproxy
-	stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+	stats socket /run/haproxy/admin.sock mode 660 level admin
 	stats timeout 30s
 	user haproxy
 	group haproxy
@@ -33,13 +33,19 @@ defaults
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
 
-frontend myfrontend
-	bind *:80
-	bind *:443 ssl crt /etc/haproxy/certs/www.daslam.tech.pem
-	http-request redirect scheme https code 301 if { hdr(Host) -i www.daslam.tech } !{ ssl_fc }
-	default_backend myservers
+frontend  ehoneah-frontend-http
+        bind *:80
+        mode http
+	http-request set-header X-Forwarded-Proto http
+        default_backend ehoneah-backend
 
-backend myservers
-	balance roundrobin
-	server web-01 54.164.152.102:80 check
-	server web-02 100.25.197.15:80 check
+frontend ehoneah-frontend-https
+	bind *:443 ssl crt /etc/haproxy/certs/www.ehoneah.tech.pem
+	http-request set-header X-Forwarded-Proto https
+	http-request redirect scheme https code 301 unless { ssl_fc }
+	default_backend ehoneah-backend
+
+backend ehoneah-backend
+        balance roundrobin
+        server 63210-web-01 100.25.19.204:80 check
+        server 63210-web-02 54.157.159.85:80 check
