@@ -1,6 +1,6 @@
-# A puppet scripts that fixes incorrect 'phpp' extensions to 'php'
+# Fix 500 error when a GET HTTP method is requested to Apache web server
 
-exec { 'fix-phpp':
-  command => "sed -i 's/phpp/php/g' /var/www/wp-settings.php",
-  path    => '/bin:/usr/bin'
+exec {'replace':
+  provider => shell,
+  command  => 'sed -i "s/phpp/php/g" /var/www/html/wp-settings.php'
 }
