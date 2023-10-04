@@ -5,3 +5,4 @@ exec { 'kill_process':
   path     => ['/usr/bin/'],
   provider => 'shell',
   }
+  
