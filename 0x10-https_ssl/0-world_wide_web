@@ -21,4 +21,3 @@ if [[ $subdomain == "all" ]]; then
 else
     audit_subdomain $subdomain
 fi
-
