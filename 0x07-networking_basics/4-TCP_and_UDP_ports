@@ -2,3 +2,4 @@
 #diplays active tcp and udp ports
 
 netstat -lp
+
