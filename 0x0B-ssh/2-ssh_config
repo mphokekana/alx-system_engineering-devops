@@ -52,3 +52,4 @@ Host *
     GSSAPIAuthentication yes
     IdentityFile ~/.ssh/holberton
     PasswordAuthentication no
+
