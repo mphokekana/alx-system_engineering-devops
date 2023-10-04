@@ -17,4 +17,3 @@ ExecStart=/usr/bin/gunicorn \
 
 [Install]
 WantedBy=multi-user.target
-
